@@ -12,10 +12,13 @@ static void receiver_loop(NmeaReceiver& receiver) {
 
     printf("[nmea]\n");
     printf("-----------------------------------------------------\n");
+    printf("in the receiver_loop\n");
 
     for (;;) {
         // Wait for the next nmea message.
+        printf("In the waiting message loop\n");
         auto message = receiver.wait_for_message();
+        printf("After message recevied\n");
         if (message) {
             message->print();
         } else {
@@ -28,6 +31,7 @@ static void receiver_loop(NmeaReceiver& receiver) {
 
 int main(int argc, char** argv) {
     auto receiver = parse_configuration(argc, argv);
+    printf("After parse_config in main\n");
     receiver_loop(*receiver.get());
     return 0;
 }

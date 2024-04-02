@@ -46,10 +46,14 @@ void NmeaReceiver::process() {
 
 std::unique_ptr<Message> NmeaReceiver::wait_for_message() {
     for (;;) {
+        printf("receiver: before process\n");
         process();
-
+        printf("receiver: after process\n");
         auto message = try_parse();
+        printf("receiver: parse successful\n");
+        std::unique_ptr<receiver::nmea::Message> << message << '\n';
         if (message) {
+            printf("receiver: message true\n");
             return message;
         }
 
